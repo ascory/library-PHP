@@ -1,7 +1,7 @@
 # PHP library for Ascory
 > [!WARNING]
 > The library was created by Ascory users. No assistance may be provided for this repository. By using this code, you automatically agree to the MIT license.
-# Installation
+## Installation
 1. Upload the `ascory.php` file to your scripts folder.
 2. Declare an Ascory class:
 ```php
