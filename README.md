@@ -12,23 +12,23 @@ $key1 = "c0a9cc6d8d4243c4a644f8e57d085438"; # First shop key
 $key2 = "56d4f8ee1ee480707ee9f3210da5aca2"; # Second shop key
 $ascory = new Ascory($shop, $key1, $key2);
 ```
-# Usage
-## Item
-### Create
+## API Documentation
+### Item
+#### Create
 ```php
-$ascory->item->create([
+$ascory->createItem([
   "name" => "Apple", # Item name (5 to 30 characters)
   "description" => "Delicious Apple", # Item description (5 to 50 characters)
   "amount" => 0.5 # Item price in dollars (number to hundredths from 0.1 to 100)
 ]);
 ```
-### Check
+#### Check
 ```php
 $ascory->item->check([
   "id" => 1 # Item ID
 ]);
 ```
-### Delete
+#### Delete
 ```php
 $ascory->item->delete([
   "id" => 1 # Item ID
