@@ -24,13 +24,13 @@ $ascory->item->create([
 ```
 ### Check
 ```php
-$ascory->item->create([
+$ascory->item->check([
   "id" => 1 # Item ID
 ]);
 ```
 ### Delete
 ```php
-$ascory->item->create([
+$ascory->item->delete([
   "id" => 1 # Item ID
 ]);
 ```
