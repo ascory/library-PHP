@@ -22,7 +22,7 @@ class ascory{
             "data" => $param[1]
         ];
     }
-    public function createItem{
+    public function createItem($param){
         if(!mb_strlen($param["name"]) < 5 or mb_strlen($param["name"]) > 30){
             $this->returnAnswer(false, "The item name should be between 5 and 30 characters.");
         }
