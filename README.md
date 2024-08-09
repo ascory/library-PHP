@@ -28,3 +28,9 @@ $ascory->item->create([
   "id" => 1 # Item ID
 ]);
 ```
+### Delete
+```php
+$ascory->item->create([
+  "id" => 1 # Item ID
+]);
+```
