@@ -22,24 +22,19 @@ class ascory{
             "data" => $param[1]
         ];
     }
-}
-class ascoryItem{
-    public function __construct($ascory) {
-        $this->ascory = $ascory;
-    }
-    public function create($param){
+    public function createItem{
         if(!mb_strlen($param["name"]) < 5 or mb_strlen($param["name"]) > 30){
-            $this->ascory->returnAnswer(false, "The item name should be between 5 and 30 characters.");
+            $this->returnAnswer(false, "The item name should be between 5 and 30 characters.");
         }
         if(!mb_strlen($param["description"]) < 5 or mb_strlen($param["description"]) > 50){
-            $this->ascory->returnAnswer(false, "The item description should be between 5 and 50 characters.");
+            $this->returnAnswer(false, "The item description should be between 5 and 50 characters.");
         }
         if(!isset($param["amount"]) or !filter_var($param["amount"], FILTER_VALIDATE_FLOAT)){
-            $this->ascory->returnAnswer(false, "The amount of an item must be a number between 0.1 and 1000.");
+            $this->returnAnswer(false, "The amount of an item must be a number between 0.1 and 1000.");
         }
         $param["amount"] = round($param["amount"], 2);
         if($param["amount"] < 0.1 or $param["amount"] > 1000){
-            $this->ascory->returnAnswer(false, "The amount of an item must be a number between 0.1 and 1000.");
+            $this->returnAnswer(false, "The amount of an item must be a number between 0.1 and 1000.");
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://api.ascory.com/v1/item/create");
@@ -49,20 +44,25 @@ class ascoryItem{
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
-            "shop" => $this->ascory->shop,
-            "hash" => $this->ascory->hash,
+            "shop" => $this->shop,
+            "hash" => $this->hash,
             "name" => $param["name"],
             "description" => $param["description"],
             "amount" => $param["amount"]
         ]));
         $response = json_decode(curl_exec($ch), true);
         if($response["code"] == 200){
-            $this->ascory->returnAnswer(true, $response["data"]);
+            $this->returnAnswer(true, $response["data"]);
         }
         if($response["code"] == 400){
-            $this->ascory->returnAnswer(false, $response["data"]["en"]);
+            $this->returnAnswer(false, $response["data"]["en"]);
         }
-        $this->ascory->returnAnswer(false, "There's been an unknown error. It may be a problem with communication with the API server or curl.");
+        $this->returnAnswer(false, "There's been an unknown error. It may be a problem with communication with the API server or curl.");
+    }
+}
+class ascoryItem{
+    public function __construct($ascory) {
+        $this->ascory = $ascory;
     }
     public function check($param){
         if(!isset($param["id"]) or !$id or !filter_var($param["id"], FILTER_VALIDATE_INT) or $param["id"] < 0){
